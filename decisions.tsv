@@ -1,0 +1,10 @@
+ts	phase	decision	why	evidence	result
+2026-11-07T09:29:49Z	frame	Use the requested three workspaces and one typed trip	Preview and export must share calculation and layout	packages/contracts/src/index.ts	implementation started
+2026-11-07T09:43:41Z	core	Separate effective travel days from PM days	The two forms can use different day bases	tests/calculator.test.ts	6-day versus 4-day test passed
+2026-11-07T09:43:41Z	pdf	Widen place and date cells after checking the first print	Yala and the return date need one line	qa-output/มิถุนายน/7-13/ใบเคลีย 7-13.pdf	All 21 pages visually inspected
+2026-11-07T09:54:09Z	pdf	Check the portrait budget pages separately	The complete sample has seven additional pages	qa-output/visual/sheet-budget-1.png; qa-output/visual/sheet-budget-2.png	Seven portrait pages visually inspected
+2026-11-07T09:54:09Z	ui	Drive the packaged app with both source PDFs and the June trip	The app must load the same fonts and save through IPC	qa-output/visual/desktop-verified.png	Imports, settings, history, both previews, discrepancy and export passed
+2026-11-07T09:54:09Z	packaging	Sign the local bundle directly with ad hoc codesign	The packaged executable needs a valid local signature	out/PEA Clear Desktop-darwin-arm64.zip	Signature verification, packaged startup and ZIP integrity passed
+2026-11-07T09:54:09Z	audit	Validate nickname limits and print with five PM rows and ten segments	Worksheet names must fit and the full voucher must stay on A4	tests/calculator.test.ts; scripts/verify-electron.mjs	Edge cases verified with the packaged app
+2026-11-07T09:54:09Z	verification	Verify the sample files produced by the final package	QA should refer to the exact app being delivered	qa-output/มิถุนายน/7-13	21 page images match reviewed images; 16 sheets and 225 cached formulas; typecheck and 25 tests pass
+2026-11-07T10:22:43Z	frame	Use order groups with PM rows and a local source archive	The workbook tracks PM allocation separately from the order and expenses	ตุลาคม/11-17 ตุลาคม .xlsx; packages/contracts/src/index.ts	workbook inspected and contract defined

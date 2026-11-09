@@ -1,0 +1,279 @@
+:root {
+  color: #111;
+  font-family: PrintSarabunNew, "Noto Sans Thai", sans-serif;
+  font-size: 9pt;
+  line-height: 1.28;
+  --rule: 0.22mm solid #111;
+  --strong-rule: 0.35mm solid #111;
+  --dotted-rule: 0.2mm dotted #222;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, p { margin: 0; }
+h1, h2 { font-size: inherit; }
+img { display: block; object-fit: contain; }
+
+.page {
+  background: white;
+  margin-inline: auto;
+  break-inside: avoid;
+  break-after: page;
+  overflow-wrap: anywhere;
+  print-color-adjust: exact;
+  -webkit-print-color-adjust: exact;
+}
+
+.page:last-child { break-after: auto; }
+.clear-page { width: 297mm; height: 210mm; padding: 5mm 10.4mm 7mm 13.7mm; }
+.budget-page { width: 210mm; height: 297mm; padding: 18.8mm 18mm 8mm 17.5mm; }
+
+@media screen {
+  body { background: #ededed; }
+  .page + .page { margin-top: 5mm; }
+}
+
+table { width: 100%; border-collapse: collapse; table-layout: fixed; }
+td, th { padding: 0.35mm 0.65mm; text-align: center; vertical-align: middle; }
+th { font-weight: 400; }
+.amount { text-align: right; padding-right: 1mm; font-variant-numeric: tabular-nums; }
+
+.voucher-form, .report-form { border: var(--rule); }
+.voucher-header { display: grid; grid-template-columns: 21.5% minmax(0, 1fr); }
+
+.voucher-emblem {
+  border-right: var(--strong-rule);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5mm;
+  padding: 1.45mm 0.5mm 1mm;
+  font-weight: 700;
+}
+
+.voucher-emblem img { width: 28.3mm; height: 27.4mm; }
+.voucher-emblem div { min-height: 5.7mm; text-align: center; }
+.voucher-fields { min-width: 0; }
+
+.form-line {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5mm;
+  min-height: 7.2mm;
+  padding: 1.05mm 2mm 0.65mm 0.65mm;
+}
+
+.field {
+  display: flex;
+  align-items: baseline;
+  flex: 1 1 0;
+  min-width: 0;
+  gap: 1.3mm;
+}
+
+.field-label { flex-shrink: 0; white-space: nowrap; }
+
+.entry {
+  flex: 1 1 0;
+  min-width: 0;
+  min-height: 1.18em;
+  border-bottom: var(--dotted-rule);
+  line-height: 1.15;
+  text-align: center;
+  padding-inline: 0.35mm;
+}
+
+.identifiers, .claimant { border-bottom: var(--rule); }
+.claimant-name { flex-grow: 1.4; }
+.claimant-id, .claimant-code { flex-grow: 0.8; }
+.claimant-position { flex-grow: 0.75; }
+.claimant-department { flex-grow: 1.1; }
+.recipient .field { flex: 0 1 38mm; }
+
+.order { display: grid; grid-template-columns: minmax(0, 29fr) minmax(0, 16fr) minmax(0, 55fr); }
+.location { display: grid; grid-template-columns: minmax(0, 27fr) minmax(0, 73fr); }
+.expanded-voucher .order { grid-template-columns: minmax(0, 3fr) minmax(0, 2fr); }
+.expanded-voucher .order-work { grid-column: 1 / -1; }
+.expanded-voucher .location { grid-template-columns: minmax(0, 55fr) minmax(0, 45fr); }
+.expanded-voucher :is(.order-work, .order-location) .entry { font-size: 8pt; }
+.expanded-voucher .voucher-fields > .form-line { min-height: 6.35mm; padding-block: 0.75mm 0.45mm; }
+.expanded-voucher .voucher-expenses tbody td { height: 5.95mm; }
+.expanded-voucher .voucher-signatures { min-height: 24.5mm; }
+.trip-date { flex-grow: 1.6; }
+.trip-length { flex-grow: 1.35; }
+.trip-nights { flex-grow: 0.55; }
+
+.voucher-expenses { border-block: var(--strong-rule); }
+.voucher-expenses :is(th, td) + :is(th, td) { border-left: var(--rule); }
+.voucher-expenses thead th { height: 7.15mm; border-bottom: var(--rule); }
+.voucher-expenses tbody td { height: 6.7mm; border-bottom: var(--dotted-rule); }
+.voucher-expenses tfoot td { height: 7.2mm; border-top: var(--strong-rule); }
+
+.place-column { width: 6.12%; }
+.travel-place { display: block; white-space: nowrap; overflow: hidden; }
+.date-column { width: 5.5%; }
+.time-column { width: 4.46%; }
+.voucher-expenses tbody :is(td:nth-child(2), td:nth-child(3), td:nth-child(5), td:nth-child(6)) {
+  padding-inline: 0.2mm;
+  white-space: nowrap;
+  font-size: 8.6pt;
+}
+.receipt-column { width: 7.05%; }
+.account-column { width: 11.45%; }
+.description-column { width: 21.25%; }
+.cost-column { width: 7.03%; }
+.amount-column { width: 7.2%; }
+.tax-column { width: 5.37%; }
+.total-column { width: 8.49%; }
+
+.account-cell, .expense-description { text-align: left; }
+.account-boxes {
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  align-items: stretch;
+  width: 25mm;
+  height: 4.85mm;
+  border: 0.18mm solid #4aaebf;
+  font-variant-numeric: tabular-nums;
+}
+
+.account-boxes span { text-align: center; line-height: 4.35mm; }
+.account-boxes span + span { border-left: 0.18mm solid #4aaebf; }
+.voucher-total { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; text-align: left; }
+.voucher-total span:nth-child(2) { text-align: center; }
+.payment-line { border-bottom: var(--rule); }
+.money-words { flex-grow: 1.55; }
+
+.voucher-signatures { display: grid; grid-template-columns: 16% 16% 18% 28% 22%; min-height: 32.5mm; }
+.voucher-signature {
+  display: grid;
+  grid-template-rows: auto 1fr auto auto;
+  justify-items: center;
+  gap: 1.65mm;
+  min-width: 0;
+  padding: 1mm 1.5mm 2mm;
+  text-align: center;
+}
+
+.voucher-signature + .voucher-signature { border-left: var(--rule); }
+.signature-approval { font-size: 11pt; font-weight: 700; }
+.signature-name { width: 72%; align-self: end; border-bottom: var(--dotted-rule); padding-bottom: 0.8mm; }
+.signature-name:not(:empty) { border-color: transparent; }
+.voucher-note { padding: 1.1mm 0.65mm 0; }
+.voucher-note u { margin-right: 1mm; }
+
+.report-page h1 {
+  display: grid;
+  align-items: center;
+  min-height: 8.45mm;
+  text-align: center;
+  font-size: 11pt;
+}
+
+.report-date-column { width: 10.75%; }
+.report-activity-column { width: 61.35%; }
+.report-number-column { width: 27.9%; }
+.report-table :is(th, td) + :is(th, td) { border-left: var(--rule); }
+.report-table th { height: 7.3mm; border-bottom: var(--rule); font-weight: 700; }
+.report-table tbody td { height: calc(81mm / var(--work-row-count)); border-bottom: var(--dotted-rule); }
+.report-table .flight-row td { height: 7.5mm; border-bottom: 0; }
+.report-activity { text-align: left; padding-inline: 1.1mm; }
+.expanded-report .report-table tbody { font-size: 8pt; line-height: 1.15; }
+.expanded-report .report-table tbody td { padding-block: 0.16mm; }
+.flight-row { font-size: 9pt; }
+
+.flight-box {
+  display: inline-block;
+  width: 4.1mm;
+  height: 3.65mm;
+  border: 0.46mm solid #31568b;
+  vertical-align: -0.65mm;
+  position: relative;
+}
+
+.flight-box.checked::after {
+  content: "";
+  position: absolute;
+  inset: 0.02mm auto auto 1.08mm;
+  width: 1.25mm;
+  height: 2.25mm;
+  border: solid #31568b;
+  border-width: 0 0.35mm 0.35mm 0;
+  transform: rotate(40deg);
+}
+
+.report-note {
+  display: flex;
+  align-items: baseline;
+  gap: 2mm;
+  min-height: 22mm;
+  border-block: var(--strong-rule);
+  padding: 1.7mm 2.3mm;
+}
+
+.report-note strong { flex-shrink: 0; }
+.report-certification { min-height: 52.5mm; padding: 7.8mm 1.25mm 2mm; }
+.report-signatures { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 7mm; margin: 8mm 7mm 0; }
+.report-signatures > div { display: grid; align-content: start; text-align: center; }
+.report-signatures > div > div { min-height: 6.1mm; }
+.report-signature-line { display: flex; align-items: baseline; gap: 1.2mm; }
+.report-signature-line span, .budget-signature span { flex: 1 1 0; border-bottom: var(--dotted-rule); }
+.expanded-report .report-note { min-height: 17mm; }
+.expanded-report .report-certification { min-height: 40mm; padding-top: 4.6mm; }
+.expanded-report .report-signatures { margin-top: 5mm; }
+
+.budget-header { display: grid; grid-template-columns: 1fr 1fr; min-height: 44.5mm; border: var(--strong-rule); border-bottom: 0; }
+.budget-header > div { min-width: 0; }
+.budget-header img { width: 17mm; height: 16mm; margin: 1.7mm auto 1.1mm; }
+.budget-header h1 { min-height: 7mm; font-size: 11pt; text-align: center; }
+.budget-header .field { min-height: 6.35mm; padding: 0.7mm 0.65mm 0.4mm; }
+.budget-header .entry { text-align: left; border: 0; }
+.budget-claimant { border-left: var(--rule); padding-top: 6.7mm; }
+
+.budget-table { border: var(--strong-rule); }
+.budget-table :is(td, th) { border: var(--rule); height: 6.35mm; }
+.budget-table thead { border-bottom: var(--strong-rule); }
+.budget-table tfoot tr:first-child { border-top: var(--strong-rule); }
+.budget-table tfoot th { font-weight: 700; }
+.budget-expenses :is(td, th) { height: 4.8mm; padding-block: 0.25mm; }
+.budget-description, .allocation-code { text-align: left; }
+.budget-sequence-column, .budget-amount-column { width: 12.5%; }
+.budget-description-column { width: 37.5%; }
+.budget-total-column { width: 25%; }
+.attachment-count { display: inline-block; min-width: 9mm; }
+
+.budget-page h2 {
+  min-height: 6.35mm;
+  padding-block: 1.25mm;
+  margin-top: 6.25mm;
+  text-align: center;
+  font-weight: 400;
+}
+
+.allocation-code-column { width: 50%; }
+.allocation-table thead th { height: 12.7mm; line-height: 1.75; }
+.allocation-title span { display: block; text-align: left; }
+.allocation-title span + span { text-align: right; }
+.blank-allocation-table { margin-top: 6.2mm; }
+.blank-allocation-table .allocation-label { text-align: left; }
+.blank-allocation-table tr + tr .allocation-label { text-align: right; }
+
+.budget-footer { display: grid; grid-template-columns: minmax(0, 63fr) minmax(0, 37fr); gap: 3mm; padding: 0 1.5mm; margin-top: 6.2mm; }
+.budget-note { display: flex; align-items: baseline; gap: 3.5mm; }
+.budget-note span { flex-shrink: 0; }
+.budget-note p, .budget-signature div { min-height: 6.35mm; padding-block: 0.6mm; }
+.budget-signature { text-align: center; }
+.budget-signature div:first-child { display: flex; align-items: baseline; }
+
+.allocation-with-extras .allocation-code-column { width: 43%; }
+.allocation-with-extras .allocation-extra-column { width: 14%; }
+.allocation-with-extras .budget-total-column { width: 18%; }
+
+.expense-annex { padding-top: 12mm; }
+.expense-annex h1 { text-align: center; font-size: 12pt; }
+.annex-identity { display: flex; align-items: baseline; gap: 5mm; margin-block: 3mm; }
+.annex-identity .entry { text-align: left; }
+.annex-table :is(td, th) { border: var(--rule); height: 8mm; padding: 1mm; }
+.annex-table thead { border-bottom: var(--strong-rule); }
+.annex-table thead th, .annex-table tfoot th { font-weight: 700; }
+.annex-expense { background: #f0f0f0; border-top: var(--strong-rule); }
+.annex-allocation-label { text-align: right; }

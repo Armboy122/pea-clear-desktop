@@ -1,0 +1,44 @@
+{
+  "name": "pea-clear-desktop",
+  "productName": "PEA Clear Desktop",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "main": "apps/desktop/dist/main.cjs",
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
+  "engines": {
+    "node": ">=22.19"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "dev": "npm run build && electron .",
+    "make:mac": "npm run build && node scripts/package.mjs",
+    "typecheck": "node scripts/assets.mjs && tsc --noEmit",
+    "test": "vitest run",
+    "cli": "node scripts/cli.mjs",
+    "test:electron": "npm run build && node scripts/verify-electron.mjs"
+  },
+  "dependencies": {
+    "@fontsource/sarabun": "5.2.8",
+    "exceljs": "4.4.0",
+    "fastify": "5.10.0",
+    "pdfjs-dist": "6.4.299",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@electron/packager": "^19.0.0",
+    "@types/node": "24.13.5",
+    "@types/react": "19.2.15",
+    "@types/react-dom": "19.2.3",
+    "electron": "44.9.3",
+    "esbuild": "0.28.2",
+    "react": "19.2.8",
+    "react-dom": "19.2.8",
+    "typescript": "5.9.3",
+    "vite": "8.0.16",
+    "vitest": "4.1.11"
+  }
+}
